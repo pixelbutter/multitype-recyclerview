@@ -5,7 +5,9 @@ import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.LinearLayoutManager
 import android.widget.Toast
 import kotlinx.android.synthetic.main.activity_main.*
+import pixelbuttertech.com.recyclerviewdemo.model.CatImage
 import pixelbuttertech.com.recyclerviewdemo.model.Item
+import pixelbuttertech.com.recyclerviewdemo.model.ListItem
 
 class MainActivity : AppCompatActivity() {
 
@@ -14,11 +16,13 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
         recyclerView.layoutManager = LinearLayoutManager(this)
 
-        val items = (1..100).map { Item("cat $it") }
+        val items = (1..100).map {
+            if (it % 2 == 0) Item("cat $it") else CatImage()
+        }
         recyclerView.adapter = MultiTypeAdapter(items, { showCatToast(it)} )
     }
 
-    private fun showCatToast(item: Item) {
-        Toast.makeText(this, item.title, Toast.LENGTH_LONG).show()
+    private fun showCatToast(item: ListItem) {
+        Toast.makeText(this, item.getToastMessage(), Toast.LENGTH_LONG).show()
     }
 }
