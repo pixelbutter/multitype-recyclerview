@@ -18,7 +18,7 @@ class MainActivity : AppCompatActivity(),
         recyclerView.layoutManager = LinearLayoutManager(this)
 
         val items = (1..100).map {
-            if (it % 2 == 0) Chef() else Food()
+            if (it % 2 == 0) Chef() else Food.newInstance()
         }
         recyclerView.adapter = MultiTypeAdapter(items, this, this)
     }

@@ -4,7 +4,7 @@ import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
+import kotlinx.android.synthetic.main.item_food.view.*
 import pixelbuttertech.com.recyclerviewdemo.common.ViewType
 import pixelbuttertech.com.recyclerviewdemo.common.ViewTypeDelegateAdapter
 import pixelbuttertech.com.recyclerviewdemo.model.Food
@@ -27,9 +27,13 @@ class FoodDelegateAdapter(private val listener: ActionListener) : ViewTypeDelega
 
     private class FoodViewHolder(view: View, private val listener: ActionListener) : RecyclerView.ViewHolder(view) {
         fun bind(food: Food) {
-            val imageView = itemView.findViewById<ImageView>(R.id.foodImage)
-            imageView.setImageResource(food.drawableId)
-            itemView.setOnClickListener { listener.onFoodClicked() }
+            itemView.apply {
+                foodName.text = food.name
+                foodImage.setImageResource(food.drawableId)
+                foodDescription.text = food.description
+                foodPrice.text = "\$${food.cost}"
+                setOnClickListener { listener.onFoodClicked() }
+            }
         }
     }
 }
