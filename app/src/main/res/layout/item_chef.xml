@@ -9,9 +9,9 @@
     app:cardElevation="2dp">
 
     <TextView
-        android:id="@+id/basicCardText"
+        android:id="@+id/chefText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:padding="16dp"
-        tools:text="Cat."/>
+        tools:text="Cat Chef"/>
 </android.support.v7.widget.CardView>
