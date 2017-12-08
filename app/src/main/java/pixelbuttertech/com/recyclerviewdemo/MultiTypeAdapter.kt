@@ -6,17 +6,16 @@ import android.view.ViewGroup
 import pixelbuttertech.com.recyclerviewdemo.common.ViewType
 import pixelbuttertech.com.recyclerviewdemo.common.ViewTypeDelegateAdapter
 
-class MultiTypeAdapter(items: List<ViewType>, chefListener: ChefDelegateAdapter.ActionListener,
-                       foodListener: FoodDelegateAdapter.ActionListener) :
+class MultiTypeAdapter(presenter: RestaurantContract.Presenter) :
         RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
-    private val items: List<ViewType>
+    private var items: List<ViewType>
     private var delegateAdapters = SparseArrayCompat<ViewTypeDelegateAdapter>()
 
     init {
-        this.items = ArrayList<ViewType>(items)
-        delegateAdapters.put(ViewType.TYPE_CHEF, ChefDelegateAdapter(chefListener))
-        delegateAdapters.put(ViewType.TYPE_FOOD, FoodDelegateAdapter(foodListener))
+        this.items = ArrayList(0)
+        delegateAdapters.put(ViewType.TYPE_CHEF, ChefDelegateAdapter(presenter))
+        delegateAdapters.put(ViewType.TYPE_FOOD, FoodDelegateAdapter(presenter))
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
@@ -30,5 +29,10 @@ class MultiTypeAdapter(items: List<ViewType>, chefListener: ChefDelegateAdapter.
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         val item = items[position]
         delegateAdapters.get(item.getItemType()).onBindViewHolder(holder, item)
+    }
+
+    fun updateItems(items: List<ViewType>) {
+        this.items = items
+        notifyDataSetChanged()
     }
 }

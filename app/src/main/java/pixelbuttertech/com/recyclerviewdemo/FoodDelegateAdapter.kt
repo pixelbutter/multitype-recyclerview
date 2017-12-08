@@ -9,15 +9,11 @@ import pixelbuttertech.com.recyclerviewdemo.common.ViewType
 import pixelbuttertech.com.recyclerviewdemo.common.ViewTypeDelegateAdapter
 import pixelbuttertech.com.recyclerviewdemo.model.Food
 
-class FoodDelegateAdapter(private val listener: ActionListener) : ViewTypeDelegateAdapter {
-
-    interface ActionListener {
-        fun onFoodClicked()
-    }
+class FoodDelegateAdapter(private val presenter: RestaurantContract.Presenter) : ViewTypeDelegateAdapter {
 
     override fun onCreateViewHolder(parent: ViewGroup): RecyclerView.ViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.item_food, parent, false)
-        return FoodViewHolder(view, listener)
+        return FoodViewHolder(view, presenter)
     }
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, item: ViewType) {
@@ -25,14 +21,14 @@ class FoodDelegateAdapter(private val listener: ActionListener) : ViewTypeDelega
         holder.bind(item as Food)
     }
 
-    private class FoodViewHolder(view: View, private val listener: ActionListener) : RecyclerView.ViewHolder(view) {
+    private class FoodViewHolder(view: View, private val presenter: RestaurantContract.Presenter) : RecyclerView.ViewHolder(view) {
         fun bind(food: Food) {
             itemView.apply {
                 foodName.text = food.name
                 foodImage.setImageResource(food.drawableId)
                 foodDescription.text = food.description
                 foodPrice.text = "\$${food.cost}"
-                setOnClickListener { listener.onFoodClicked() }
+                setOnClickListener { presenter.onFoodClicked() }
             }
         }
     }
