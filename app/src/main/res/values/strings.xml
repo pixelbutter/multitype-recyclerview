@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">RecyclerView Demo</string>
+
+    <string name="chef_label_pov">Cooking style: </string>
+    <string name="chef_specialty_dish">Specialty dish:</string>
+    <string name="chef_years_of_experience">%1$d years of experience</string>
 </resources>

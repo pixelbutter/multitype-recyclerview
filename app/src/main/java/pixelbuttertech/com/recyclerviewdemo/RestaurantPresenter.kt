@@ -8,7 +8,7 @@ class RestaurantPresenter(val restaurantView: RestaurantContract.View)
 
     override fun loadItems() {
         val items = (1..100).map {
-            if (it % 2 == 0) Chef() else Food.newInstance()
+            if (it % 2 == 0) Chef.newInstance() else Food.newInstance()
         }
         restaurantView.showItems(items)
     }
