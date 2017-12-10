@@ -10,30 +10,34 @@
 
     <android.support.constraint.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:paddingBottom="16dp"
-        android:paddingTop="16dp">
+        android:layout_height="wrap_content">
 
         <ImageView
             android:id="@+id/chefImage"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="16dp"
-            android:layout_marginEnd="16dp"
+            android:layout_height="0dp"
             android:adjustViewBounds="true"
-            android:elevation="2dp"
-            android:maxWidth="56dp"
-            android:scaleType="fitCenter"
+            android:scaleType="centerCrop"
+            android:alpha="0.60"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/chefName"
-            tools:src="@drawable/food_pancakes" />
+            app:layout_constraintStart_toStartOf="@+id/guideline"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:src="@drawable/chef_cat" />
+
+        <android.support.constraint.Guideline
+            android:id="@+id/guideline"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.67" />
 
         <TextView
             android:id="@+id/chefName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
             android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
@@ -46,7 +50,7 @@
             android:layout_marginEnd="8dp"
             android:layout_marginStart="16dp"
             android:textAppearance="@style/TextAppearance.AppCompat.Caption"
-            app:layout_constraintEnd_toStartOf="@+id/chefImage"
+            app:layout_constraintEnd_toStartOf="@+id/guideline"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/chefName"
             tools:text="10 years of experience" />
@@ -56,11 +60,10 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
-            android:layout_marginTop="8dp"
             android:text="@string/chef_label_pov"
             android:textAppearance="@style/TextAppearance.AppCompat.Body2"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/yearsOfExperience" />
+            app:layout_constraintBaseline_toBaselineOf="@+id/chefPovValue"
+            app:layout_constraintStart_toStartOf="parent" />
 
         <TextView
             android:id="@+id/chefPovValue"
@@ -68,10 +71,14 @@
             android:layout_height="wrap_content"
             android:layout_marginEnd="8dp"
             android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:breakStrategy="balanced"
+            android:gravity="bottom"
             android:textAppearance="@style/TextAppearance.AppCompat.Caption"
-            app:layout_constraintBaseline_toBaselineOf="@+id/chefPovLabel"
-            app:layout_constraintEnd_toStartOf="@+id/chefImage"
+            app:layout_constraintEnd_toStartOf="@+id/guideline"
             app:layout_constraintStart_toEndOf="@+id/chefPovLabel"
+            app:layout_constraintTop_toBottomOf="@+id/yearsOfExperience"
+            tools:targetApi="m"
             tools:text="Organic grass-fed vegetables" />
 
         <TextView
@@ -81,8 +88,8 @@
             android:layout_marginStart="16dp"
             android:text="@string/chef_specialty_dish"
             android:textAppearance="@style/TextAppearance.AppCompat.Body2"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/chefPovValue" />
+            app:layout_constraintBaseline_toBaselineOf="@+id/chefSpecialtyDishValue"
+            app:layout_constraintStart_toStartOf="parent" />
 
         <ImageView
             android:id="@+id/chefSpecialtyImage"
@@ -91,10 +98,10 @@
             android:layout_marginEnd="4dp"
             android:layout_marginStart="4dp"
             android:scaleType="fitCenter"
-            app:layout_constraintBottom_toBottomOf="@+id/chefSpecialtyDishValue"
+            app:layout_constraintBottom_toBottomOf="@+id/chefSpecialtyLabel"
             app:layout_constraintEnd_toStartOf="@+id/chefSpecialtyDishValue"
             app:layout_constraintStart_toEndOf="@+id/chefSpecialtyLabel"
-            app:layout_constraintTop_toTopOf="@+id/chefSpecialtyDishValue"
+            app:layout_constraintTop_toTopOf="@+id/chefSpecialtyLabel"
             tools:srcCompat="@drawable/food_pancakes" />
 
         <TextView
@@ -104,9 +111,58 @@
             android:layout_marginEnd="8dp"
             android:layout_marginStart="24dp"
             android:textAppearance="@style/TextAppearance.AppCompat.Caption"
-            app:layout_constraintBaseline_toBaselineOf="@+id/chefSpecialtyLabel"
-            app:layout_constraintEnd_toStartOf="@+id/chefImage"
+            app:layout_constraintEnd_toStartOf="@+id/guideline"
             app:layout_constraintStart_toEndOf="@+id/chefSpecialtyLabel"
+            app:layout_constraintTop_toBottomOf="@+id/chefPovValue"
             tools:text="Pancakes" />
+
+        <View
+            android:id="@+id/chefDivider"
+            android:layout_width="0dp"
+            android:layout_height="1dp"
+            android:layout_marginTop="16dp"
+            android:background="?attr/colorControlNormal"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/guideline"
+            app:layout_constraintTop_toBottomOf="@+id/chefSpecialtyDishValue" />
+
+        <ImageView
+            android:id="@+id/chefActionMessage"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp"
+            android:alpha="0.50"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:padding="8dp"
+            app:srcCompat="@drawable/ic_message_hollow"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/chefDivider" />
+
+        <ImageView
+            android:id="@+id/chefActionFavorite"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp"
+            android:alpha="0.50"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:padding="8dp"
+            app:srcCompat="@drawable/ic_favorite_hollow"
+            app:layout_constraintStart_toEndOf="@+id/chefActionMessage"
+            app:layout_constraintTop_toBottomOf="@+id/chefDivider" />
+
+        <ImageView
+            android:id="@+id/chefActionBookmark"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp"
+            android:alpha="0.50"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:padding="8dp"
+            app:srcCompat="@drawable/ic_bookmark_hollow"
+            app:layout_constraintStart_toEndOf="@+id/chefActionFavorite"
+            app:layout_constraintTop_toBottomOf="@+id/chefDivider" />
     </android.support.constraint.ConstraintLayout>
 </android.support.v7.widget.CardView>

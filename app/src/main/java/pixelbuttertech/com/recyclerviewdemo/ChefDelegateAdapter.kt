@@ -1,5 +1,7 @@
 package pixelbuttertech.com.recyclerviewdemo
 
+import android.graphics.PorterDuff
+import android.support.v4.content.ContextCompat
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
@@ -23,15 +25,19 @@ class ChefDelegateAdapter(private val presenter: RestaurantContract.Presenter) :
     }
 
     private class ChefViewHolder(view: View, private val presenter: RestaurantContract.Presenter) : RecyclerView.ViewHolder(view) {
-        fun bind(chef: Chef) {
-            val chefName = itemView.findViewById<TextView>(R.id.chefName)
-            val experience = itemView.findViewById<TextView>(R.id.yearsOfExperience)
-            val pov = itemView.findViewById<TextView>(R.id.chefPovValue)
-            val specialtyImage = itemView.findViewById<ImageView>(R.id.chefSpecialtyImage)
-            val specialtyName = itemView.findViewById<TextView>(R.id.chefSpecialtyDishValue)
+        private val chefName: TextView = view.findViewById(R.id.chefName)
+        private val chefImage: ImageView = view.findViewById(R.id.chefImage)
+        private val experience: TextView = view.findViewById(R.id.yearsOfExperience)
+        private val pov: TextView = view.findViewById(R.id.chefPovValue)
+        private val specialtyImage: ImageView = view.findViewById<ImageView>(R.id.chefSpecialtyImage)
+        private val specialtyName: TextView = view.findViewById<TextView>(R.id.chefSpecialtyDishValue)
 
+        fun bind(chef: Chef) {
             with(chef) {
                 chefName.text = name
+                chefImage.setImageResource(drawableId)
+                chefImage.drawable.setColorFilter(ContextCompat.getColor(itemView.context,
+                        R.color.colorPrimary), PorterDuff.Mode.DST_ATOP)
                 experience.text = itemView.context.getString(R.string.chef_years_of_experience, yearsOfExperience)
                 pov.text = pointOfView
                 specialtyImage.setImageResource(specialtyDish.drawableId)
