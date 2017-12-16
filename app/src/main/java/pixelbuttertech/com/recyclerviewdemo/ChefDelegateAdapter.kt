@@ -29,8 +29,11 @@ class ChefDelegateAdapter(private val presenter: RestaurantContract.Presenter) :
         private val chefImage: ImageView = view.findViewById(R.id.chefImage)
         private val experience: TextView = view.findViewById(R.id.yearsOfExperience)
         private val pov: TextView = view.findViewById(R.id.chefPovValue)
-        private val specialtyImage: ImageView = view.findViewById<ImageView>(R.id.chefSpecialtyImage)
-        private val specialtyName: TextView = view.findViewById<TextView>(R.id.chefSpecialtyDishValue)
+        private val specialtyImage: ImageView = view.findViewById(R.id.chefSpecialtyImage)
+        private val specialtyName: TextView = view.findViewById(R.id.chefSpecialtyDishValue)
+        private val messageButton: View = view.findViewById(R.id.chefActionMessage)
+        private val favoriteButton: View = view.findViewById(R.id.chefActionFavorite)
+        private val bookmarkButton: View = view.findViewById(R.id.chefActionBookmark)
 
         fun bind(chef: Chef) {
             with(chef) {
@@ -42,6 +45,10 @@ class ChefDelegateAdapter(private val presenter: RestaurantContract.Presenter) :
                 pov.text = pointOfView
                 specialtyImage.setImageResource(specialtyDish.drawableId)
                 specialtyName.text = specialtyDish.name
+
+                messageButton.setOnClickListener { presenter.onMessageChef(chef) }
+                favoriteButton.setOnClickListener { presenter.onFavoriteChef(chef) }
+                bookmarkButton.setOnClickListener { presenter.onBookmarkChef(chef) }
             }
             itemView.setOnClickListener { presenter.onChefSelected(chef.name) }
         }

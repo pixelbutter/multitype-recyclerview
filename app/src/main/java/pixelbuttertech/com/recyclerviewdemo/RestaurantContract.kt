@@ -1,6 +1,7 @@
 package pixelbuttertech.com.recyclerviewdemo
 
 import pixelbuttertech.com.recyclerviewdemo.common.ViewType
+import pixelbuttertech.com.recyclerviewdemo.model.Chef
 
 interface RestaurantContract {
 
@@ -15,8 +16,13 @@ interface RestaurantContract {
     interface Presenter {
         fun loadItems()
 
+         // chef
         fun onChefSelected(name: String)
+        fun onMessageChef(chef: Chef)
+        fun onFavoriteChef(chef: Chef)
+        fun onBookmarkChef(chef: Chef)
 
+        // food
         fun onFoodClicked()
     }
 }

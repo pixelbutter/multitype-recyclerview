@@ -17,6 +17,21 @@ class RestaurantPresenter(val restaurantView: RestaurantContract.View)
         restaurantView.showMessage("$name is a chef!")
     }
 
+    override fun onMessageChef(chef: Chef) {
+        restaurantView.showMessage("Messaging chef ${chef.name}!")
+        // todo set up intent? dialog?
+    }
+
+    override fun onFavoriteChef(chef: Chef) {
+        // todo
+        restaurantView.showMessage("${chef.name} added to favorites!")
+    }
+
+    override fun onBookmarkChef(chef: Chef) {
+        // todo
+        restaurantView.showMessage("${chef.name} bookmarked")
+    }
+
     override fun onFoodClicked() {
         restaurantView.showMessage("This is a food!")
     }
