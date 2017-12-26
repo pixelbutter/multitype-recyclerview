@@ -1,17 +1,14 @@
-package pixelbuttertech.com.recyclerviewdemo.model
+package pixelbuttertech.com.recyclerviewdemo.model.data
 
 import android.support.annotation.DrawableRes
 import pixelbuttertech.com.recyclerviewdemo.R
-import pixelbuttertech.com.recyclerviewdemo.common.ViewType
 import java.util.*
 
 data class Chef constructor(val name: String,
                             @DrawableRes val drawableId: Int,
                             val yearsOfExperience: Int,
                             val pointOfView: String,
-                            val specialtyDish: Food) : ViewType {
-
-    override fun getItemType() = ViewType.TYPE_CHEF
+                            val specialtyDish: Food) {
 
     companion object {
         private val RANDOM = Random()

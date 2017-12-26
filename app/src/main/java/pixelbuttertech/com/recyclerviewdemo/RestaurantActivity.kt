@@ -30,4 +30,13 @@ class RestaurantActivity : AppCompatActivity(), RestaurantContract.View {
     override fun showMessage(message: String) {
         Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
     }
+
+    override fun showMessageChefDialog(chefName: String) {
+        val fragment = MessageDialogFragment.newInstance(chefName)
+        fragment.show(fragmentManager, TAG_MESSAGE_CHEF_DIALOG)
+    }
+
+    companion object {
+        const val TAG_MESSAGE_CHEF_DIALOG = "tagMessageChefDialogFragment"
+    }
 }

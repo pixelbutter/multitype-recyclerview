@@ -7,7 +7,7 @@ import android.view.ViewGroup
 import kotlinx.android.synthetic.main.item_food.view.*
 import pixelbuttertech.com.recyclerviewdemo.common.ViewType
 import pixelbuttertech.com.recyclerviewdemo.common.ViewTypeDelegateAdapter
-import pixelbuttertech.com.recyclerviewdemo.model.Food
+import pixelbuttertech.com.recyclerviewdemo.model.data.Food
 
 class FoodDelegateAdapter(private val presenter: RestaurantContract.Presenter) : ViewTypeDelegateAdapter {
 

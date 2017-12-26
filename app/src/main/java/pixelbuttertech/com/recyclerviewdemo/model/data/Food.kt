@@ -1,4 +1,4 @@
-package pixelbuttertech.com.recyclerviewdemo.model
+package pixelbuttertech.com.recyclerviewdemo.model.data
 
 import android.support.annotation.DrawableRes
 import pixelbuttertech.com.recyclerviewdemo.R

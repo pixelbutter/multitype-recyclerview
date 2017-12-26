@@ -10,7 +10,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import pixelbuttertech.com.recyclerviewdemo.common.ViewType
 import pixelbuttertech.com.recyclerviewdemo.common.ViewTypeDelegateAdapter
-import pixelbuttertech.com.recyclerviewdemo.model.Chef
+import pixelbuttertech.com.recyclerviewdemo.model.ChefModel
 
 class ChefDelegateAdapter(private val presenter: RestaurantContract.Presenter) : ViewTypeDelegateAdapter {
 
@@ -21,7 +21,7 @@ class ChefDelegateAdapter(private val presenter: RestaurantContract.Presenter) :
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, item: ViewType) {
         holder as ChefViewHolder
-        holder.bind(item as Chef)
+        holder.bind(item as ChefModel)
     }
 
     private class ChefViewHolder(view: View, private val presenter: RestaurantContract.Presenter) : RecyclerView.ViewHolder(view) {
@@ -35,22 +35,22 @@ class ChefDelegateAdapter(private val presenter: RestaurantContract.Presenter) :
         private val favoriteButton: View = view.findViewById(R.id.chefActionFavorite)
         private val bookmarkButton: View = view.findViewById(R.id.chefActionBookmark)
 
-        fun bind(chef: Chef) {
-            with(chef) {
-                chefName.text = name
-                chefImage.setImageResource(drawableId)
+        fun bind(chefModel: ChefModel) {
+            with(chefModel) {
+                chefName.text = chef.name
+                chefImage.setImageResource(chef.drawableId)
                 chefImage.drawable.setColorFilter(ContextCompat.getColor(itemView.context,
                         R.color.colorPrimary), PorterDuff.Mode.DST_ATOP)
-                experience.text = itemView.context.getString(R.string.chef_years_of_experience, yearsOfExperience)
-                pov.text = pointOfView
-                specialtyImage.setImageResource(specialtyDish.drawableId)
-                specialtyName.text = specialtyDish.name
+                experience.text = itemView.context.getString(R.string.chef_years_of_experience, chef.yearsOfExperience)
+                pov.text = chef.pointOfView
+                specialtyImage.setImageResource(chef.specialtyDish.drawableId)
+                specialtyName.text = chef.specialtyDish.name
 
                 messageButton.setOnClickListener { presenter.onMessageChef(chef) }
                 favoriteButton.setOnClickListener { presenter.onFavoriteChef(chef) }
                 bookmarkButton.setOnClickListener { presenter.onBookmarkChef(chef) }
             }
-            itemView.setOnClickListener { presenter.onChefSelected(chef.name) }
+            itemView.setOnClickListener { presenter.onChefSelected(chefModel.chef.name) }
         }
     }
 }

@@ -5,4 +5,9 @@
     <string name="chef_specialty_dish">Specialty dish:</string>
     <string name="chef_years_of_experience">%1$d years of experience</string>
     <string name="chef_action_hire">Hire</string>
+    <string name="chef_generic">chef</string>
+    <string name="chef_message_dialog_title">Ask %1$s for help in the restaurant?</string>
+    <string name="chef_message_positive_action">Message</string>
+    <string name="chef_message_negative_action">Cancel</string>
+    <string name="chef_message_sent_toast">Message sent!</string>
 </resources>
