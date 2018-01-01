@@ -10,4 +10,8 @@
     <string name="chef_message_positive_action">Message</string>
     <string name="chef_message_negative_action">Cancel</string>
     <string name="chef_message_sent_toast">Message sent!</string>
+    <string name="chef_message_added_to_bookmarks">%1$s added to bookmarks</string>
+    <string name="chef_message_removed_from_bookmarks">%1$s removed from bookmarks</string>
+    <string name="chef_message_added_to_favorites">%1$s added to favorites!</string>
+    <string name="chef_message_removed_from_favorites">%1$s removed from favorites</string>
 </resources>

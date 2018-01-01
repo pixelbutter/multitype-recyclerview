@@ -31,6 +31,24 @@ class RestaurantActivity : AppCompatActivity(), RestaurantContract.View {
         Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
     }
 
+    override fun showFavoritedMessage(chefName: String, favorited: Boolean) {
+        val message = if (favorited) {
+            getString(R.string.chef_message_added_to_favorites, chefName)
+        } else {
+            getString(R.string.chef_message_removed_from_favorites, chefName)
+        }
+        Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
+    }
+
+    override fun showBookmarkedMessage(chefName: String, bookmarked: Boolean) {
+        val message = if (bookmarked) {
+            getString(R.string.chef_message_added_to_bookmarks, chefName)
+        } else {
+            getString(R.string.chef_message_removed_from_bookmarks, chefName)
+        }
+        Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
+    }
+
     override fun showMessageChefDialog(chefName: String) {
         val fragment = MessageDialogFragment.newInstance(chefName)
         fragment.show(fragmentManager, TAG_MESSAGE_CHEF_DIALOG)

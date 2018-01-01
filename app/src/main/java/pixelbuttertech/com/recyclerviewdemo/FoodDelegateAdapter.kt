@@ -7,7 +7,7 @@ import android.view.ViewGroup
 import kotlinx.android.synthetic.main.item_food.view.*
 import pixelbuttertech.com.recyclerviewdemo.common.ViewType
 import pixelbuttertech.com.recyclerviewdemo.common.ViewTypeDelegateAdapter
-import pixelbuttertech.com.recyclerviewdemo.model.data.Food
+import pixelbuttertech.com.recyclerviewdemo.model.ui.FoodModel
 
 class FoodDelegateAdapter(private val presenter: RestaurantContract.Presenter) : ViewTypeDelegateAdapter {
 
@@ -18,16 +18,16 @@ class FoodDelegateAdapter(private val presenter: RestaurantContract.Presenter) :
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, item: ViewType) {
         holder as FoodViewHolder
-        holder.bind(item as Food)
+        holder.bind(item as FoodModel)
     }
 
     private class FoodViewHolder(view: View, private val presenter: RestaurantContract.Presenter) : RecyclerView.ViewHolder(view) {
-        fun bind(food: Food) {
+        fun bind(food: FoodModel) {
             itemView.apply {
-                foodName.text = food.name
-                foodImage.setImageResource(food.drawableId)
-                foodDescription.text = food.description
-                foodPrice.text = "\$${food.cost}"
+                foodName.text = food.getName()
+                foodImage.setImageResource(food.getDrawableId())
+                foodDescription.text = food.getDescription()
+                foodPrice.text = "\$${food.getCost()}"
                 setOnClickListener { presenter.onFoodClicked() }
             }
         }

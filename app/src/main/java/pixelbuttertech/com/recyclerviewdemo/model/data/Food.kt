@@ -2,15 +2,12 @@ package pixelbuttertech.com.recyclerviewdemo.model.data
 
 import android.support.annotation.DrawableRes
 import pixelbuttertech.com.recyclerviewdemo.R
-import pixelbuttertech.com.recyclerviewdemo.common.ViewType
 import java.util.*
 
 data class Food private constructor(val name: String,
                                     @DrawableRes val drawableId: Int,
                                     val cost: Int = getRandomPrice(),
-                                    val description: String = getRandomDescription()) : ViewType {
-
-    override fun getItemType() = ViewType.TYPE_FOOD
+                                    val description: String = getRandomDescription()) {
 
     companion object {
         private val RANDOM = Random()

@@ -10,7 +10,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import pixelbuttertech.com.recyclerviewdemo.common.ViewType
 import pixelbuttertech.com.recyclerviewdemo.common.ViewTypeDelegateAdapter
-import pixelbuttertech.com.recyclerviewdemo.model.ChefModel
+import pixelbuttertech.com.recyclerviewdemo.model.ui.ChefModel
 
 class ChefDelegateAdapter(private val presenter: RestaurantContract.Presenter) : ViewTypeDelegateAdapter {
 
@@ -32,25 +32,59 @@ class ChefDelegateAdapter(private val presenter: RestaurantContract.Presenter) :
         private val specialtyImage: ImageView = view.findViewById(R.id.chefSpecialtyImage)
         private val specialtyName: TextView = view.findViewById(R.id.chefSpecialtyDishValue)
         private val messageButton: View = view.findViewById(R.id.chefActionMessage)
-        private val favoriteButton: View = view.findViewById(R.id.chefActionFavorite)
-        private val bookmarkButton: View = view.findViewById(R.id.chefActionBookmark)
+        private val favoriteButton: ImageView = view.findViewById(R.id.chefActionFavorite)
+        private val bookmarkButton: ImageView = view.findViewById(R.id.chefActionBookmark)
 
         fun bind(chefModel: ChefModel) {
             with(chefModel) {
-                chefName.text = chef.name
-                chefImage.setImageResource(chef.drawableId)
-                chefImage.drawable.setColorFilter(ContextCompat.getColor(itemView.context,
-                        R.color.colorPrimary), PorterDuff.Mode.DST_ATOP)
-                experience.text = itemView.context.getString(R.string.chef_years_of_experience, chef.yearsOfExperience)
-                pov.text = chef.pointOfView
-                specialtyImage.setImageResource(chef.specialtyDish.drawableId)
-                specialtyName.text = chef.specialtyDish.name
+                chefName.text = getName()
+                chefImage.setImageResource(getDrawableId())
+                chefImage.drawable.setColorFilter(ContextCompat.getColor(itemView.context, R.color.colorPrimary),
+                        PorterDuff.Mode.DST_ATOP)
+                experience.text = itemView.context.getString(R.string.chef_years_of_experience, getExperience())
+                pov.text = getPointOfView()
 
-                messageButton.setOnClickListener { presenter.onMessageChef(chef) }
-                favoriteButton.setOnClickListener { presenter.onFavoriteChef(chef) }
-                bookmarkButton.setOnClickListener { presenter.onBookmarkChef(chef) }
+                val specialtyDish = getSpecialtyDish()
+                specialtyImage.setImageResource(specialtyDish.drawableId)
+                specialtyName.text = specialtyDish.name
+
+                messageButton.setOnClickListener { presenter.onMessageChef(this) }
+
+                setFavoriteDrawable(chefModel.favorited)
+                favoriteButton.setOnClickListener {
+                    val favorited = !chefModel.favorited
+                    setFavoriteDrawable(favorited)
+                    presenter.onFavoriteChef(this, favorited)
+                }
+
+                setBookmarkDrawable(chefModel.bookmarked)
+                bookmarkButton.setOnClickListener {
+                    val bookmarked = !chefModel.bookmarked
+                    setBookmarkDrawable(bookmarked)
+                    presenter.onBookmarkChef(this, bookmarked)
+                }
             }
-            itemView.setOnClickListener { presenter.onChefSelected(chefModel.chef.name) }
+            itemView.setOnClickListener { presenter.onChefSelected(chefModel.getName()) }
+        }
+
+        private fun setFavoriteDrawable(favorited: Boolean) {
+            val context = itemView.context
+            val drawable = if (favorited) {
+                context.getDrawable(R.drawable.ic_favorite_filled)
+            } else {
+                context.getDrawable(R.drawable.ic_favorite_hollow)
+            }
+            favoriteButton.setImageDrawable(drawable)
+        }
+
+        private fun setBookmarkDrawable(bookmarked: Boolean) {
+            val context = itemView.context
+            val drawable = if (bookmarked) {
+                context.getDrawable(R.drawable.ic_bookmark_filled)
+            } else {
+                context.getDrawable(R.drawable.ic_bookmark_hollow)
+            }
+            bookmarkButton.setImageDrawable(drawable)
         }
     }
 }
